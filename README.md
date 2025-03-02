@@ -1,12 +1,10 @@
-# Takuya's Homepage
+# Florin's Homepage
 
-[https://www.craftz.dog/](https://www.craftz.dog/)
+Personal website showcasing my work as a freelance developer and esports enthusiast.
 
-## Tutorial
+## About
 
-Watch how I built this website on YouTube:
-
-[![YouTube thumbnail](./doc/thumb.png)](https://www.youtube.com/watch?v=bSMZgXzC9AA)
+This is my personal portfolio website where I share my projects, experience, and interests. I'm a freelance developer based in Milan with a passion for building esports tools, services, and applications.
 
 ## Stack
 
@@ -29,19 +27,19 @@ $PROJECT_ROOT
 └── public
 ```
 
+## Credits
+
+This website is based on [Takuya Matsuyama's](https://www.craftz.dog/) design. The original template has been modified to showcase my own work and personal information.
+
 ## License
 
 MIT License.
 
-You can create your own homepage for free without notifying me by forking this project under the following conditions:
+This project is a fork of Takuya Matsuyama's portfolio website with personalized content. As per the original license conditions:
 
-- Add a link to [my homepage](https://www.craftz.dog/)
-- Do not use the 3d voxel dog
+- A link to the [original creator's homepage](https://www.craftz.dog/) is included
+- The 3D voxel dog model has been replaced with a custom 3D model
 
 Check out [LICENSE](./LICENSE) for more detail.
 
 ---
-
-Looking for a Markdown note-taking app? Check out my app called Inkdrop:
-
-[![Inkdrop](https://github.com/craftzdog/dotfiles-public/raw/master/images/inkdrop.png)](https://www.inkdrop.app/)
