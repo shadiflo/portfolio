@@ -1,9 +1,9 @@
 {
-  "name": "craftzdog-homepage",
+  "name": "shadi-homepage",
   "version": "1.0.0",
-  "description": "Takuya's website",
+  "description": "Florin's website",
   "scripts": {
-    "dev": "next dev -H 0.0.0.0",
+    "dev": "next dev -H 0.0.0.0 -p 3001 ",
     "build": "next build",
     "start": "next start",
     "prettier": "prettier --write .",
