@@ -2,22 +2,40 @@ import NextLink from 'next/link'
 import Image from 'next/image'
 import { Box, Text, LinkBox, LinkOverlay } from '@chakra-ui/react'
 import { Global } from '@emotion/react'
+import GlassCard from './glass-card'
 
 export const GridItem = ({ children, href, title, thumbnail }) => (
-  <Box w="100%" textAlign="center">
-    <LinkBox cursor="pointer">
-      <Image
-        src={thumbnail}
-        alt={title}
-        className="grid-item-thumbnail"
-        placeholder="blur"
-        loading="lazy"
-      />
-      <LinkOverlay href={href} target="_blank">
-        <Text mt={2}>{title}</Text>
-      </LinkOverlay>
-      <Text fontSize={14}>{children}</Text>
-    </LinkBox>
+  <Box w="100%" display="flex" justifyContent="center">
+    <GlassCard
+      title={title}
+      description={children}
+      href={href}
+      width="320px"
+      height="240px"
+    >
+      {thumbnail && (
+        <Box
+          position="absolute"
+          top="0"
+          left="0"
+          right="0"
+          bottom="0"
+          zIndex="1"
+          opacity="0.3"
+        >
+          <Image
+            src={thumbnail}
+            alt={title}
+            fill
+            style={{ 
+              objectFit: 'cover',
+              borderRadius: '20px'
+            }}
+            loading="lazy"
+          />
+        </Box>
+      )}
+    </GlassCard>
   </Box>
 )
 
@@ -28,26 +46,38 @@ export const WorkGridItem = ({
   title,
   thumbnail
 }) => (
-  <Box w="100%" textAlign="center">
-    <LinkBox
-      as={NextLink}
-      href={`/${category}/${id}`}
-      scroll={false}
-      cursor="pointer"
-    >
-      <Image
-        src={thumbnail}
-        alt={title}
-        className="grid-item-thumbnail"
-        placeholder="blur"
-      />
-      <LinkOverlay as="div" href={`/${category}/${id}`}>
-        <Text mt={2} fontSize={20}>
-          {title}
-        </Text>
-      </LinkOverlay>
-      <Text fontSize={14}>{children}</Text>
-    </LinkBox>
+  <Box w="100%" display="flex" justifyContent="center">
+    <NextLink href={`/${category}/${id}`} scroll={false} passHref>
+      <GlassCard
+        title={title}
+        description={children}
+        width="320px"
+        height="240px"
+        as="a"
+      >
+        {thumbnail && (
+          <Box
+            position="absolute"
+            top="0"
+            left="0"
+            right="0"
+            bottom="0"
+            zIndex="1"
+            opacity="0.3"
+          >
+            <Image
+              src={thumbnail}
+              alt={title}
+              fill
+              style={{ 
+                objectFit: 'cover',
+                borderRadius: '20px'
+              }}
+            />
+          </Box>
+        )}
+      </GlassCard>
+    </NextLink>
   </Box>
 )
 

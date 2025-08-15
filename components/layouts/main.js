@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
-import NavBar from '../navbar'
+import GlassNavbar from '../glass-navbar'
 import { Box, Container } from '@chakra-ui/react'
 import Footer from '../footer'
 import RocketLoader from '../voxel-diamond-loader'
@@ -12,7 +12,7 @@ const LazyVoxelRocket = dynamic(() => import('../voxel-diamond'), {
 
 const Main = ({ children, router }) => {
   return (
-    <Box as="main" pb={8}>
+    <Box as="main" pb={8} position="relative">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="florin's homepage" />
@@ -30,7 +30,22 @@ const Main = ({ children, router }) => {
         <title>Florin  - Homepage</title>
       </Head>
 
-      <NavBar path={router.asPath} />
+      {/* Static Sand Background */}
+      <Box
+        position="fixed"
+        top="0"
+        left="0"
+        width="100vw"
+        height="100vh"
+        zIndex="-1"
+        backgroundImage="url('/images/sand1.jpeg')"
+        backgroundSize="100%"
+        backgroundRepeat="no-repeat"
+        backgroundPosition="center"
+        opacity="0.8"
+      />
+
+      <GlassNavbar path={router.asPath} />
 
       <Container maxW="container.md" pt={14}>
         <LazyVoxelRocket />

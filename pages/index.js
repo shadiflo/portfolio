@@ -16,6 +16,8 @@ import { BioSection, BioYear } from '../components/bio'
 import Layout from '../components/layouts/article'
 import Section from '../components/section'
 import { GridItem } from '../components/grid-item'
+import SimpleGlassCard from '../components/simple-glass-card'
+import SimpleGlassButton from '../components/simple-glass-button'
 import { IoLogoTwitter, IoLogoDiscord, IoLogoGithub } from 'react-icons/io5'
 import thumbInkdrop from '../public/images/works/super.png'
 import Image from 'next/image'
@@ -23,15 +25,16 @@ import Image from 'next/image'
 const Home = () => (
   <Layout>
     <Container>
-      <Box
-        borderRadius="lg"
-        mb={6}
-        p={3}
-        textAlign="center"
-        bg={useColorModeValue('whiteAlpha.500', 'whiteAlpha.200')}
-        css={{ backdropFilter: 'blur(10px)' }}
-      >
-        Hello, I&apos;m an app developer based in Milan!
+      <Box display="flex" justifyContent="center" mb={6}>
+        <SimpleGlassCard
+          width="100%"
+          height="80px"
+          maxWidth="600px"
+        >
+          <Box textAlign="center" fontSize="lg" fontWeight="500">
+            Hello, I&apos;m an app developer based in Milan!
+          </Box>
+        </SimpleGlassCard>
       </Box>
 
       <Box display={{ md: 'flex' }}>
@@ -75,15 +78,15 @@ const Home = () => (
         Florin is a freelance developer based in Milan with a passion for building esports tools, services and applications. He works across the entire development process, from planning and designing to implementing practical solutions with code. When not coding, he loves playing CS2, WoW, and Hearthstone. Currently, he is freelancing while working on building his own startup focused on gaming and esports solutions.
         </Paragraph>
         <Box align="center" my={4}>
-          <Button
+          <SimpleGlassButton
             as={NextLink}
             href="/works"
             scroll={false}
             rightIcon={<ChevronRightIcon />}
-            colorScheme="teal"
+            size="lg"
           >
             My portfolio
-          </Button>
+          </SimpleGlassButton>
         </Box>
       </Section>
 
@@ -91,81 +94,99 @@ const Home = () => (
         <Heading as="h3" variant="section-title">
           Bio
         </Heading>
-        <BioSection>
-          <BioYear>Education</BioYear>
-          Pursued IT studies at university level with a focus on practical applications.
-        </BioSection>
-        <BioSection>
-          <BioYear>Career Start</BioYear>
-          Began professional journey as an automation specialist working with PLC systems.
-        </BioSection>
-        <BioSection>
-          <BioYear>Entrepreneurship</BioYear>
-          Founded and developed a startup for the local municipality that was later acquired.
-        </BioSection>
-        <BioSection>
-          <BioYear>Present</BioYear>
-          Working as a freelance developer and building new ventures in the gaming space.
-        </BioSection>
+        <SimpleGrid columns={[1, 1, 2]} gap={4} mb={6}>
+          <SimpleGlassCard
+            title="Education"
+            description="Pursued IT studies at university level with a focus on practical applications."
+            width="100%"
+            height="120px"
+          />
+          <SimpleGlassCard
+            title="Career Start"
+            description="Began professional journey as an automation specialist working with PLC systems."
+            width="100%"
+            height="120px"
+          />
+          <SimpleGlassCard
+            title="Entrepreneurship"
+            description="Founded and developed a startup for the local municipality that was later acquired."
+            width="100%"
+            height="120px"
+          />
+          <SimpleGlassCard
+            title="Present"
+            description="Working as a freelance developer and building new ventures in the gaming space."
+            width="100%"
+            height="120px"
+          />
+        </SimpleGrid>
       </Section>
 
       <Section delay={0.3}>
         <Heading as="h3" variant="section-title">
           I ♥
         </Heading>
-        <Paragraph>
-          Music, Gaming, Watching Movies, Driving, Technology, and Creative Problem Solving
-        </Paragraph>
+        <Box display="flex" justifyContent="center" mb={6}>
+          <SimpleGlassCard
+            width="100%"
+            height="100px"
+            maxWidth="600px"
+          >
+            <Box textAlign="center" fontSize="md" opacity="0.9">
+              Music, Gaming, Watching Movies, Driving, Technology, and Creative Problem Solving
+            </Box>
+          </SimpleGlassCard>
+        </Box>
       </Section>
 
       <Section delay={0.3}>
         <Heading as="h3" variant="section-title">
           On the web
         </Heading>
-        <List>
+        <List spacing={3}>
           <ListItem>
-            <Link href="https://github.com/shadiflo" target="_blank">
-              <Button
-                variant="ghost"
-                colorScheme="teal"
-                leftIcon={<IoLogoGithub />}
-              >
-                @shadiflo
-              </Button>
-            </Link>
+            <SimpleGlassButton
+              as="a"
+              href="https://github.com/shadiflo"
+              target="_blank"
+              leftIcon={<IoLogoGithub />}
+              size="md"
+            >
+              @shadiflo
+            </SimpleGlassButton>
           </ListItem>
           <ListItem>
-            <Link href="https://twitter.com/superclubgg" target="_blank">
-              <Button
-                variant="ghost"
-                colorScheme="teal"
-                leftIcon={<IoLogoTwitter />}
-              >
-                @superclubgg
-              </Button>
-            </Link>
+            <SimpleGlassButton
+              as="a"
+              href="https://twitter.com/superclubgg"
+              target="_blank"
+              leftIcon={<IoLogoTwitter />}
+              size="md"
+            >
+              @superclubgg
+            </SimpleGlassButton>
           </ListItem>
           <ListItem>
-            <Link href="https://discord.gg/cYAYpWhdb8" target="_blank">
-              <Button
-                variant="ghost"
-                colorScheme="teal"
-                leftIcon={<IoLogoDiscord />}
-              >
-                @disocord (superclubgg)
-              </Button>
-            </Link>
+            <SimpleGlassButton
+              as="a"
+              href="https://discord.gg/cYAYpWhdb8"
+              target="_blank"
+              leftIcon={<IoLogoDiscord />}
+              size="md"
+            >
+              @discord (superclubgg)
+            </SimpleGlassButton>
           </ListItem>
           <ListItem>
-            <Link href="https://twitter.com/shadigm_" target="_blank">
-              <Button
-                variant="ghost"
-                colorScheme="teal"
-                leftIcon={<IoLogoTwitter />}
-              >
-                @shadigm_
-              </Button>
-            </Link>
+            <SimpleGlassButton
+              as="a"
+              href="https://twitter.com/shadigm_"
+              target="_blank"
+              leftIcon={<IoLogoTwitter />}
+              size="md"
+            >
+              @shadigm_
+            </SimpleGlassButton>
           </ListItem>
         </List>
 
