@@ -268,6 +268,9 @@ const GlassNavbar = props => {
             <GlassLinkItem href="/works" path={path}>
               Works
             </GlassLinkItem>
+            <GlassLinkItem href="/snippets" path={path}>
+              Snippets
+            </GlassLinkItem>
             <GlassLinkItem href="https://superclub.gg" path={path} target="_blank">
               SuperClub
             </GlassLinkItem>
@@ -322,6 +325,14 @@ const GlassNavbar = props => {
                     _hover={{ bg: 'rgba(255,255,255,0.1)' }}
                   >
                     Works
+                  </MenuItem>
+                  <MenuItem 
+                    as={MenuLink} 
+                    href="/snippets"
+                    bg="transparent"
+                    _hover={{ bg: 'rgba(255,255,255,0.1)' }}
+                  >
+                    Snippets
                   </MenuItem>
                   <MenuItem 
                     as={MenuLink} 

@@ -80,6 +80,9 @@ const Navbar = props => {
           <LinkItem href="/works" path={path}>
             Works
           </LinkItem>
+          <LinkItem href="/snippets" path={path}>
+            Snippets
+          </LinkItem>
           <LinkItem href="https://superclub.gg" path={path} target="_blank">
             SuperClub
           </LinkItem>
@@ -114,6 +117,9 @@ const Navbar = props => {
                 </MenuItem>
                 <MenuItem as={MenuLink} href="/works">
                   Works
+                </MenuItem>
+                <MenuItem as={MenuLink} href="/snippets">
+                  Snippets
                 </MenuItem>
                 <MenuItem as={MenuLink} href="https://superclub.gg" target="_blank">
                   SuperClub
