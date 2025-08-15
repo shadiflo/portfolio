@@ -7,8 +7,8 @@ const Footer = () => {
       <Flex justify="center" mt={2}>
         <Text>
           Template designed by{' '}
-          <Link href="https://www.craftz.dog/" target="_blank" color="teal.500">
-            Takuya Matsuyama
+          <Link href="https://www.shadi.dev/" target="_blank" color="teal.500">
+            FLORIN
           </Link>
         </Text>
       </Flex>

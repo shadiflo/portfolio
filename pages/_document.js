@@ -8,6 +8,12 @@ export default class Document extends NextDocument {
       <Html lang="en">
         <Head />
         <body>
+          <svg style={{ display: 'none' }}>
+            <filter id="glass-distortion">
+              <feTurbulence type="turbulence" baseFrequency="0.008" numOctaves="2" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="77" />
+            </filter>
+          </svg>
           <ColorModeScript initialColorMode={theme.config.initialColorMode} />
           <Main />
           <NextScript />

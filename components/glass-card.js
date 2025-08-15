@@ -12,18 +12,36 @@ const GlassCard = ({
   ...props 
 }) => {
   const cardRef = useRef(null)
-  const filterRef = useRef(null)
 
   useEffect(() => {
     const element = cardRef.current
     if (!element) return
 
-    const handleMouseMove = (e) => {
-      const rect = element.getBoundingClientRect()
-      const x = e.clientX - rect.left
-      const y = e.clientY - rect.top
+    let animationId
+    const startTime = Date.now()
+    
+    // Continuous animation for liquid glass effect
+    const animateDistortion = () => {
+      const elapsed = Date.now() - startTime
+      const time = elapsed * 0.001 // Convert to seconds
       
-      // Update highlight effect
+      // Create dynamic distortion values
+      const scaleValue = 77 + Math.sin(time * 0.5) * 30 + Math.cos(time * 0.3) * 20
+      
+      const filter = document.querySelector('#glass-distortion feDisplacementMap')
+      if (filter) {
+        filter.setAttribute('scale', scaleValue.toString())
+      }
+      
+      // Create moving highlight effect
+      const rect = element.getBoundingClientRect()
+      const centerX = rect.width / 2
+      const centerY = rect.height / 2
+      const radiusX = Math.sin(time * 0.4) * centerX * 0.8
+      const radiusY = Math.cos(time * 0.6) * centerY * 0.8
+      const x = centerX + radiusX
+      const y = centerY + radiusY
+      
       const specular = element.querySelector('.glass-specular')
       if (specular) {
         specular.style.background = `radial-gradient(
@@ -33,96 +51,59 @@ const GlassCard = ({
           rgba(255,255,255,0) 60%
         )`
       }
+      
+      animationId = requestAnimationFrame(animateDistortion)
     }
+    
+    // Start continuous animation
+    animateDistortion()
 
-    const handleMouseLeave = () => {
+    const handleMouseMove = (e) => {
+      const rect = element.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+      
+      // Override with mouse position when hovering
+      const filter = document.querySelector('#glass-distortion feDisplacementMap')
+      if (filter) {
+        const scaleX = (x / rect.width) * 100
+        const scaleY = (y / rect.height) * 100
+        filter.setAttribute('scale', Math.min(scaleX, scaleY).toString())
+      }
+      
       const specular = element.querySelector('.glass-specular')
       if (specular) {
-        specular.style.background = 'none'
+        specular.style.background = `radial-gradient(
+          circle at ${x}px ${y}px,
+          rgba(255,255,255,0.2) 0%,
+          rgba(255,255,255,0.08) 30%,
+          rgba(255,255,255,0) 60%
+        )`
       }
     }
 
     element.addEventListener('mousemove', handleMouseMove)
-    element.addEventListener('mouseleave', handleMouseLeave)
 
     return () => {
       element.removeEventListener('mousemove', handleMouseMove)
-      element.removeEventListener('mouseleave', handleMouseLeave)
+      if (animationId) {
+        cancelAnimationFrame(animationId)
+      }
     }
   }, [])
 
   const cardContent = (
     <>
-      <svg style={{ display: 'none' }}>
-        <filter id="glass-card-distortion">
-          <feTurbulence 
-            type="turbulence" 
-            baseFrequency="0.008" 
-            numOctaves="2" 
-            result="noise" 
-          />
-          <feDisplacementMap 
-            in="SourceGraphic" 
-            in2="noise" 
-            scale="40" 
-          />
-        </filter>
-      </svg>
       
       <Box className="glass-filter" />
       <Box className="glass-overlay" />
       <Box className="glass-specular" />
-      {/* Animated Sand Background */}
-      <Box
-        position="absolute"
-        inset="0"
-        zIndex="1"
-        overflow="hidden"
-        borderRadius="inherit"
-      >
-        <Box
-          position="absolute"
-          width="120%"
-          height="120%"
-          top="-10%"
-          left="-10%"
-          backgroundImage="url('/images/sand1.jpeg')"
-          backgroundSize="200px 200px"
-          backgroundRepeat="repeat"
-          opacity="0.15"
-          sx={{
-            animation: 'sandMove1 15s infinite linear',
-            '@keyframes sandMove1': {
-              '0%': { transform: 'translate(0, 0)' },
-              '100%': { transform: 'translate(-50px, -50px)' }
-            }
-          }}
-        />
-        <Box
-          position="absolute"
-          width="120%"
-          height="120%"
-          top="-10%"
-          left="-10%"
-          backgroundImage="url('/images/sand1.jpeg')"
-          backgroundSize="300px 300px"
-          backgroundRepeat="repeat"
-          opacity="0.08"
-          sx={{
-            animation: 'sandMove2 20s infinite linear reverse',
-            '@keyframes sandMove2': {
-              '0%': { transform: 'translate(0, 0) scale(1.1)' },
-              '100%': { transform: 'translate(40px, 40px) scale(1.1)' }
-            }
-          }}
-        />
-      </Box>
       
       <Box 
         className="glass-distortion-overlay"
         position="absolute"
         inset="0"
-        background="radial-gradient(circle at 20% 30%, rgba(244, 164, 96, 0.1) 0%, transparent 80%), radial-gradient(circle at 80% 70%, rgba(244, 164, 96, 0.1) 0%, transparent 80%)"
+        background="radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05) 0%, transparent 80%), radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 0%, transparent 80%)"
         backgroundSize="300% 300%"
         animation="floatDistort 10s infinite ease-in-out"
         mixBlendMode="overlay"
@@ -149,13 +130,18 @@ const GlassCard = ({
           <Heading
             as="h3"
             size="lg"
-            margin="0 0 10px 0"
+            margin="0 0 8px 0"
             fontWeight="700"
             color="#ffffff"
             textShadow="0 2px 8px rgba(0,0,0,0.9), 0 1px 4px rgba(139, 69, 19, 1), 0 0 2px rgba(0,0,0,1)"
             opacity="1 !important"
             zIndex="200"
             position="relative"
+            fontSize="lg"
+            lineHeight="1.2"
+            overflow="hidden"
+            textOverflow="ellipsis"
+            whiteSpace="nowrap"
           >
             {title}
           </Heading>
@@ -169,6 +155,8 @@ const GlassCard = ({
             textShadow="0 2px 8px rgba(0,0,0,0.9), 0 1px 4px rgba(139, 69, 19, 1), 0 0 2px rgba(0,0,0,1)"
             zIndex="200"
             position="relative"
+            fontSize="sm"
+            lineHeight="1.4"
           >
             {description}
           </Text>
@@ -194,8 +182,8 @@ const GlassCard = ({
       href={href}
       target={href ? "_blank" : undefined}
       sx={{
-        '--bg-color': 'rgba(139, 69, 19, 0.5)',
-        '--highlight': 'rgba(244, 164, 96, 0.4)',
+        '--bg-color': 'rgba(255, 255, 255, 0.25)',
+        '--highlight': 'rgba(255, 255, 255, 0.75)',
         '--text': '#ffffff',
         
         '&, & *, & h3, & p': {
@@ -211,8 +199,8 @@ const GlassCard = ({
         
         '.glass-filter': {
           zIndex: '1',
-          backdropFilter: 'blur(8px) saturate(150%) brightness(1.2)',
-          filter: 'url(#glass-card-distortion)'
+          backdropFilter: 'blur(4px)',
+          filter: 'url(#glass-distortion) saturate(120%) brightness(1.15)'
         },
         
         '.glass-overlay': {
@@ -232,8 +220,8 @@ const GlassCard = ({
         },
 
         '@media (prefers-color-scheme: dark)': {
-          '--bg-color': 'rgba(101, 67, 33, 0.4)',
-          '--highlight': 'rgba(222, 184, 135, 0.3)'
+          '--bg-color': 'rgba(0, 0, 0, 0.25)',
+          '--highlight': 'rgba(255, 255, 255, 0.15)'
         }
       }}
       {...props}

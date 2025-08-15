@@ -18,6 +18,7 @@ import Section from '../components/section'
 import { GridItem } from '../components/grid-item'
 import SimpleGlassCard from '../components/simple-glass-card'
 import SimpleGlassButton from '../components/simple-glass-button'
+import GlassCard from '../components/glass-card'
 import { IoLogoTwitter, IoLogoDiscord, IoLogoGithub } from 'react-icons/io5'
 import thumbInkdrop from '../public/images/works/super.png'
 import Image from 'next/image'
@@ -26,7 +27,7 @@ const Home = () => (
   <Layout>
     <Container>
       <Box display="flex" justifyContent="center" mb={6}>
-        <SimpleGlassCard
+        <GlassCard
           width="100%"
           height="80px"
           maxWidth="600px"
@@ -34,7 +35,7 @@ const Home = () => (
           <Box textAlign="center" fontSize="lg" fontWeight="500">
             Hello, I&apos;m an app developer based in Milan!
           </Box>
-        </SimpleGlassCard>
+        </GlassCard>
       </Box>
 
       <Box display={{ md: 'flex' }}>
@@ -95,29 +96,29 @@ const Home = () => (
           Bio
         </Heading>
         <SimpleGrid columns={[1, 1, 2]} gap={4} mb={6}>
-          <SimpleGlassCard
+          <GlassCard
             title="Education"
             description="Pursued IT studies at university level with a focus on practical applications."
             width="100%"
-            height="120px"
+            height="140px"
           />
-          <SimpleGlassCard
+          <GlassCard
             title="Career Start"
             description="Began professional journey as an automation specialist working with PLC systems."
             width="100%"
-            height="120px"
+            height="140px"
           />
-          <SimpleGlassCard
+          <GlassCard
             title="Entrepreneurship"
             description="Founded and developed a startup for the local municipality that was later acquired."
             width="100%"
-            height="120px"
+            height="140px"
           />
-          <SimpleGlassCard
+          <GlassCard
             title="Present"
             description="Working as a freelance developer and building new ventures in the gaming space."
             width="100%"
-            height="120px"
+            height="140px"
           />
         </SimpleGrid>
       </Section>
@@ -127,7 +128,7 @@ const Home = () => (
           I ♥
         </Heading>
         <Box display="flex" justifyContent="center" mb={6}>
-          <SimpleGlassCard
+          <GlassCard
             width="100%"
             height="100px"
             maxWidth="600px"
@@ -135,7 +136,7 @@ const Home = () => (
             <Box textAlign="center" fontSize="md" opacity="0.9">
               Music, Gaming, Watching Movies, Driving, Technology, and Creative Problem Solving
             </Box>
-          </SimpleGlassCard>
+          </GlassCard>
         </Box>
       </Section>
 
